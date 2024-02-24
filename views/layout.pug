@@ -1,17 +1,18 @@
 doctype html
 mixin item(title, url)
-  li
-    a(href=url class=path == url ? 'active' : '')=title
+  li(class='list-item')
+    a(href=url class=path == url ? 'item-active' : 'item')=title
 
 html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    ul
-      +item('Strona glowna', '/')
-      +item('Aktualnosci', '/news')
-      +item('Quiz', '/quiz')
-      +item('Admin', '/admin')
+    nav
+      ul
+        +item('Strona glowna', '/')
+        +item('Aktualnosci', '/news')
+        +item('Quiz', '/quiz')
+        +item('Admin', '/admin')
 
     block content

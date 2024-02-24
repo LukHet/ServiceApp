@@ -1,4 +1,5 @@
 var createError = require("http-errors");
+var cookieSession = require("cookie-session");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
@@ -8,6 +9,7 @@ var indexRouter = require("./routes/index");
 var newsRouter = require("./routes/news");
 var quizRouter = require("./routes/quiz");
 var adminRouter = require("./routes/admin");
+var config = require("./config");
 
 var app = express();
 
@@ -20,6 +22,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use(
+  cookieSession({
+    name: "session",
+    keys: config.keySession,
+    maxAge: config.maxAgeSession, // 24 hours
+  })
+);
 
 app.use((req, res, next) => {
   res.locals.path = req.path;
