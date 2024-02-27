@@ -4,12 +4,21 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+const mongoose = require("mongoose");
+var config = require("./config");
+
+main().catch((err) => console.log(err));
+
+async function main() {
+  await mongoose
+    .connect(config.db)
+    .then(() => console.log("Connected to database"));
+}
 
 var indexRouter = require("./routes/index");
 var newsRouter = require("./routes/news");
 var quizRouter = require("./routes/quiz");
 var adminRouter = require("./routes/admin");
-var config = require("./config");
 
 var app = express();
 
