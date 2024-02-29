@@ -13,13 +13,17 @@ router.all("*", (req, res, next) => {
 
 /* GET home page. */
 router.get("/", (req, res) => {
-  const newsData = new News({
-    name: "Test title",
-    description: "Test description",
-  });
+  // const newsData = new News({
+  //   name: "Test title",
+  //   description: "Test description",
+  // });
 
-  newsData.save();
-  res.render("admin", { title: "Admin" });
+  // newsData.save();
+  res.render("admin/index", { title: "Admin" });
+});
+
+router.get("/news/add", (req, res) => {
+  res.render("admin/news-form", { title: "Dodaj news" });
 });
 
 module.exports = router;
